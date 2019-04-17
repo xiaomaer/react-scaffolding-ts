@@ -1,0 +1,30 @@
+{
+  "name": "create-react-ts-cli",
+  "version": "1.0.0",
+  "description": "a simple react scaffolding with typescript",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaomaer/react-scaffolding-ts.git"
+  },
+  "bin": {
+    "create-react": "./bin/index.js"
+  },
+  "keywords": [
+    "react",
+    "react-router",
+    "babel",
+    "webpack",
+    "es6",
+    "sass/less/css",
+    "typescript"
+  ],
+  "author": "xiaoma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiaomaer/react-scaffolding-ts/issues"
+  },
+  "homepage": "https://github.com/xiaomaer/react-scaffolding-ts#readme",
+  "dependencies": {
+    "yargs": "^11.0.0"
+  }
+}
