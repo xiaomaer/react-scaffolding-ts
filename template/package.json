@@ -6,7 +6,13 @@
     "start": "webpack-dev-server --progress --color --config config/webpack.config.dev.js",
     "build": "webpack --config config/webpack.config.prod.js",
     "analyze": "NODE_ANALYZE=analyze webpack --config config/webpack.config.prod.js",
-    "fix:src": "eslint --fix --ext .tsx --ext .ts src"
+    "lint:fix": "eslint --fix --ext .tsx --ext .ts src",
+    "lint": "eslint --ext .tsx --ext .ts src"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   },
   "author": "author",
   "license": "ISC",
@@ -39,6 +45,7 @@
     "friendly-errors-webpack-plugin": "^1.7.0",
     "happypack": "^5.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^1.3.1",
     "less": "^3.0.1",
     "less-loader": "^4.1.0",
     "node-sass": "^4.8.3",
