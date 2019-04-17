@@ -21,10 +21,10 @@ module.exports = {
   },
   module: {
     rules: [{
-      test: /\.(js|jsx|tsx)$/,
+      test: /\.(ts|js)x?$/,
       loader: 'eslint-loader',
       enforce: 'pre',
-      include: ['/src/', '/test/'],
+      include: ['/src/'],
     }, {
       test: /\.(ts|js)x?$/,
       use: 'happypack/loader?id=tsx',

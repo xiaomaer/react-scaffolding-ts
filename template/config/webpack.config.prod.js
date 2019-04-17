@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin'); // 清空文件夹
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer'); // 打包模块分析
 // https://github.com/stephencookdev/speed-measure-webpack-plugin
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 // 每阶段打包时间统计
@@ -178,8 +179,6 @@ const prodConfig = merge(baseWebpackConfig, {
   ],
 });
 if (process.env.NODE_ANALYZE) {
-  // 打包模块分析
-  const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
   prodConfig.plugins.push(new BundleAnalyzerPlugin());
 }
 module.exports = smp.wrap(prodConfig);
