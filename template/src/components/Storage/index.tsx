@@ -30,6 +30,7 @@ export default class Storage extends React.Component<
     }
     checkLocalStorageExists() {
         const testKey = 'test';
+        testKey = '';
         try {
             localStorage.setItem(testKey, testKey);
             localStorage.removeItem(testKey);
