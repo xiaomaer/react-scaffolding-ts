@@ -3,70 +3,70 @@
  * @author: mamy
  * @since: 2018-04-10 10:32:52
  */
-import * as React from "react";
+import * as React from 'react';
 
 export interface StorageProps {
-  render: Function;
+    render: Function;
 }
 
 export interface StorageState {
-  localStorageAvailable: boolean;
+    localStorageAvailable: boolean;
 }
 
 export default class Storage extends React.Component<
   StorageProps,
   StorageState
 > {
-  constructor(props: StorageProps) {
-    super(props);
+    constructor(props: StorageProps) {
+        super(props);
 
-    this.state = {
-      localStorageAvailable: false
+        this.state = {
+            localStorageAvailable: false
+        };
+    }
+
+    componentDidMount() {
+        this.checkLocalStorageExists();
+    }
+    checkLocalStorageExists() {
+        const testKey = 'test';
+        try {
+            localStorage.setItem(testKey, testKey);
+            localStorage.removeItem(testKey);
+            this.setState({
+                localStorageAvailable: true
+            });
+        } catch (err) {
+            this.setState({
+                localStorageAvailable: false
+            });
+        }
+    }
+    load = (key: string) => {
+        if (this.state.localStorageAvailable) {
+            return localStorage.getItem(key);
+        }
+        return null;
     };
-  }
-
-  componentDidMount() {
-    this.checkLocalStorageExists();
-  }
-  checkLocalStorageExists() {
-    const testKey = "test";
-    try {
-      localStorage.setItem(testKey, testKey);
-      localStorage.removeItem(testKey);
-      this.setState({
-        localStorageAvailable: true
-      });
-    } catch (err) {
-      this.setState({
-        localStorageAvailable: false
-      });
+    save = (key: string, data: string) => {
+        if (this.state.localStorageAvailable) {
+            localStorage.setItem(key, data);
+        }
+    };
+    remove = (key: string) => {
+        if (this.state.localStorageAvailable) {
+            localStorage.removeItem(key);
+        }
+    };
+    render() {
+        return (
+            <span>
+                {this.props.render({
+                    load: this.load,
+                    save: this.save,
+                    remove: this.remove
+                })}
+            </span>
+        );
     }
-  }
-  load = (key: string) => {
-    if (this.state.localStorageAvailable) {
-      return localStorage.getItem(key);
-    }
-    return null;
-  };
-  save = (key: string, data: string) => {
-    if (this.state.localStorageAvailable) {
-      localStorage.setItem(key, data);
-    }
-  };
-  remove = (key: string) => {
-    if (this.state.localStorageAvailable) {
-      localStorage.removeItem(key);
-    }
-  };
-  render() {
-    return (
-      <span>
-        {this.props.render({
-          load: this.load,
-          save: this.save,
-          remove: this.remove
-        })}
-      </span>
-    );
-  }
 }
