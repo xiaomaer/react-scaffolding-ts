@@ -13,10 +13,7 @@ export interface StorageState {
     localStorageAvailable: boolean;
 }
 
-export default class Storage extends React.Component<
-  StorageProps,
-  StorageState
-> {
+export default class Storage extends React.Component<StorageProps, StorageState> {
     constructor(props: StorageProps) {
         super(props);
 

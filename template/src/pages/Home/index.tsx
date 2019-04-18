@@ -12,18 +12,18 @@ const routes = [
         path: '/',
         exact: true,
         title: () => <div>home</div>,
-        main: () => <h2>Home content</h2>,
+        main: () => <h2>Home content</h2>
     },
     {
         path: '/bubblegum',
         title: () => <div>bubblegum</div>,
-        main: () => <h2>Bubblegum content</h2>,
+        main: () => <h2>Bubblegum content</h2>
     },
     {
         path: '/shoelaces',
         title: () => <div>shoelaces</div>,
-        main: () => <h2>Shoelaces content</h2>,
-    },
+        main: () => <h2>Shoelaces content</h2>
+    }
 ];
 
 const SidebarExample = () => (

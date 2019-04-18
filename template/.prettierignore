@@ -1,0 +1,7 @@
+*.md
+*ignore
+
+.DS_Store
+package-lock.json
+
+.cache
