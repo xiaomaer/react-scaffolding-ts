@@ -10,9 +10,6 @@
 # 测试和打包目录
 /test/
 /dist/
-
-# 通过反取忽略目录
-/src/component/*
-!/src/component/CompA
-!/src/component/CompB
-# 这样的效果是除 CompA 和 CompB 外其他目录都会被忽略
+/config/
+/node_modules/
+/types/

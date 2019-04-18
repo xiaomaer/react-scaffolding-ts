@@ -8,6 +8,8 @@
         "analyze": "NODE_ANALYZE=analyze webpack --config config/webpack.config.prod.js",
         "lint:es": "eslint --fix --ext .ts,tsx,js,jsx src",
         "lint:style": "stylelint --fix src/**/*.{css,sass,scss} --syntax scss",
+        "format:es":"prettier --write **/*.{ts,tsx,js,jsx}",
+        "format:style":"prettier --write **/*.{css,scss,less}",
         "commit": "git-cz"
     },
     "husky": {
@@ -22,6 +24,7 @@
             "git add"
         ],
         "src/**/*.{css,scss,less}": [
+            "prettier --write",
             "stylelint --fix",
             "git add"
         ]

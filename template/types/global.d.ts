@@ -3,4 +3,4 @@ interface Window {
     _knb: any;
     unescape: Function;
     escape: Function;
-  }
+}
