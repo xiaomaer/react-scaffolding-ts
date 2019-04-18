@@ -7,11 +7,13 @@
     "build": "webpack --config config/webpack.config.prod.js",
     "analyze": "NODE_ANALYZE=analyze webpack --config config/webpack.config.prod.js",
     "lint:fix": "eslint --fix --ext .tsx --ext .ts src",
-    "lint": "eslint --ext .tsx --ext .ts src"
+    "lint": "eslint --ext .tsx --ext .ts src",
+    "commit": "git-cz"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -e $GIT_PARAMS"
     }
   },
   "lint-staged": {
@@ -19,6 +21,11 @@
       "eslint --fix",
       "git add"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "author": "author",
   "license": "ISC",
@@ -34,6 +41,8 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
+    "@commitlint/cli": "^7.5.2",
+    "@commitlint/config-conventional": "^7.5.0",
     "@types/react": "^16.8.13",
     "@types/react-dom": "^16.8.4",
     "@types/react-router-dom": "^4.3.2",
@@ -41,7 +50,9 @@
     "babel-eslint": "^9.0.0",
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^0.1.19",
+    "commitizen": "^3.0.7",
     "css-loader": "^0.28.11",
+    "cz-conventional-changelog": "^2.1.0",
     "eslint": "^5.16.0",
     "eslint-config-alloy": "^2.0.0-alpha.2",
     "eslint-loader": "^2.1.2",
