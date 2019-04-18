@@ -12,6 +12,7 @@
 ## 工具支持
 * babel7
 * eslint
+* stylelint
 * prettier
 * commit message规范（angular规范）
 * husky
