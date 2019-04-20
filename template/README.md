@@ -1,13 +1,19 @@
 ## 说明
 * 该项目通过create-react-ts-cli创建
 
-## 
+## 框架
 * react 
 * react-router(v4)
+* react-loadable - 按需加载
 * es6
 * typescript
 * css/less/sass
 * webpack(v4)
+
+## 库
+* antd - 按需加载
+* lodash - 按需加载
+* moment - 按时区引入
 
 ## 工具支持
 * babel7

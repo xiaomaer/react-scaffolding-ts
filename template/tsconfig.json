@@ -14,12 +14,16 @@
         "outDir": "dist",
         "baseUrl": ".",
         "jsx": "react",
+        "allowSyntheticDefaultImports": true,
+        "lib": ["dom", "esnext"],
+        "paths": {
+            "@api/*": ["src/api/*"],
+            "@components/*": ["src/components/*"],
+            "@constants/*": ["src/constants/*"],
+            "@pages/*": ["src/pages/*"],
+            "@utils/*": ["src/utils/*"]
+        }
     },
-    "include": [
-        "src"
-    ],
-    "exclude": [
-        "node_modules",
-        "dist"
-    ]
+    "include": ["src"],
+    "exclude": ["node_modules", "dist"]
 }

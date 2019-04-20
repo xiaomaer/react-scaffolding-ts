@@ -38,3 +38,8 @@ create-react-ts -h 查看帮助
 
 ## 模版结构
 
+
+
+`todo:`
+* jest单元测试支持
+* gitlab ci持续集成

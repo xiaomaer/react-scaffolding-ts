@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Storage from '../../components/Storage';
+import Storage from '@components/Storage';
 
 export interface LoginState {
     username: string;
