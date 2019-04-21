@@ -26,7 +26,7 @@ module.exports = merge(baseWebpackConfig, {
         }
     },
     output: {
-        path: path.join(__ROOT, 'dist'),
+        path: path.resolve(__ROOT, 'dist'),
         filename: '[name].js',
         publicPath: '/'
     },

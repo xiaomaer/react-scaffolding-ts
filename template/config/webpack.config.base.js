@@ -9,6 +9,7 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const os = require('os');
 
 const __ROOT = path.resolve(__dirname, '../'); // 根目录;
+const __SRC = path.resolve(__ROOT, 'src');
 
 const happyThreadPool = HappyPack.ThreadPool({
     size: os.cpus().length
@@ -27,7 +28,7 @@ module.exports = {
             '@pages': path.resolve(__ROOT, 'src/pages/'),
             '@utils': path.resolve(__ROOT, 'src/utils/')
         },
-        modules: [path.resolve(__ROOT, 'src'), 'node_modules']
+        modules: [__SRC, 'node_modules']
     },
     module: {
         rules: [
@@ -35,12 +36,12 @@ module.exports = {
                 test: /\.(ts|js)x?$/,
                 loader: 'eslint-loader',
                 enforce: 'pre',
-                include: path.join(__ROOT, 'src')
+                include: __SRC
             },
             {
                 test: /\.(ts|js)x?$/,
                 use: 'happypack/loader?id=babel',
-                include: path.join(__ROOT, 'src'),
+                include: __SRC,
                 exclude: /node_modules/
             },
             {
@@ -114,14 +115,15 @@ module.exports = {
                 // 要添加到编译中的文件的绝对路径，以及生成的HTML文件。支持 globby 字符串
                 filepath: path.resolve(__ROOT, 'dll/*.dll.js'),
                 // 文件输出目录
-                outputPath: 'lib'
+                outputPath: 'lib',
+                publicPath: 'lib'
             }
         ]),
         // 描述动态链接库的文件内容
-        /* new webpack.DllReferencePlugin({
+        new webpack.DllReferencePlugin({
             context: __ROOT,
-            manifest: require('../dll/commonLib.manifest.json')
-        }), */
+            manifest: require(path.resolve(__ROOT, 'dll/commonLib.manifest.json')) // 必须是绝对路径，相对路径会报错
+        }),
         // 按需加载lodash
         new LodashModuleReplacementPlugin({
             paths: true

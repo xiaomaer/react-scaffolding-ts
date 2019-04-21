@@ -5,7 +5,7 @@ const FirendlyErrorePlugin = require('friendly-errors-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const __ROOT = path.resolve(__dirname, '../');
-const __BUILD_COMMONLIB = path.join(__ROOT, 'dll');
+const __BUILD_COMMONLIB = path.resolve(__ROOT, 'dll');
 
 module.exports = {
     mode: 'production',
@@ -13,8 +13,7 @@ module.exports = {
         commonLib: ['react', 'react-dom', 'react-router-dom', 'react-loadable', 'moment']
     },
     output: {
-        // 指定生成文件所在目录
-        // 由于每次打包生产环境时会清空 dist 文件夹，因此这里我将它们存放在了 dll 文件夹下
+        // 指定生成文件所在目录。由于每次打包生产环境时会清空 dist 文件夹，因此这里我将它们存放在了 dll 文件夹下
         path: __BUILD_COMMONLIB,
         // 指定文件名
         filename: '[name].[hash:8].dll.js',
@@ -30,9 +29,9 @@ module.exports = {
         // 接入 DllPlugin
         new webpack.DllPlugin({
             context: __ROOT,
-            // 描述动态链接库的 manifest.json 文件输出时的文件名称
-            // 由于每次打包生产环境时会清空 dist 文件夹，因此这里我将它们存放在了 dll 文件夹下
-            path: path.join(__BUILD_COMMONLIB, '[name].manifest.json')
+            // 描述动态链接库的 manifest.json 文件输出时的文件名称。由于每次打包生产环境时会清空 dist 文件夹，因此这里我将它们存放在了 dll 文件夹下
+            path: path.resolve(__BUILD_COMMONLIB, '[name].manifest.json'), // 必须是绝对路径，相对路径会报错
+            name: '[name]_[hash]' // 和library保持一致
         }),
         new FirendlyErrorePlugin(),
         // 以进度条的形式反馈打包进度
