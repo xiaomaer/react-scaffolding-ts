@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const HappyPack = require('happypack');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin'); // 清空文件夹
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
@@ -82,20 +82,21 @@ module.exports = {
         ]
     },
     plugins: [
+        // 以进度条的形式反馈打包进度
+        new ProgressBarPlugin(),
+        // 清空文dist件夹
         new CleanWebpackPlugin({
             verbose: true, // 开启在控制台输出信息
             dry: false // 启用删除文件
         }),
-        new HappyPack({
-            id: 'babel',
-            threadPool: happyThreadPool,
-            loaders: ['cache-loader', 'babel-loader'],
-            verbose: true // 允许 HappyPack 输出日志
+        // 描述动态链接库的文件内容
+        new webpack.DllReferencePlugin({
+            context: __ROOT,
+            manifest: require(path.resolve(__ROOT, 'dll/commonLib.manifest.json')) // 必须是绝对路径，相对路径会报错
         }),
         // Generates an `index.html` file with the <script> injected.
         new HtmlWebpackPlugin({
             template: path.resolve('public/index.html'),
-            inject: true,
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,
@@ -103,6 +104,7 @@ module.exports = {
                 useShortDoctype: true,
                 removeEmptyAttributes: true,
                 removeStyleLinkTypeAttributes: true,
+                removeScriptTypeAttributes: true,
                 keepClosingSlash: true,
                 minifyJS: true,
                 minifyCSS: true,
@@ -116,19 +118,19 @@ module.exports = {
                 filepath: path.resolve(__ROOT, 'dll/*.dll.js'),
                 // 文件输出目录
                 outputPath: 'lib',
+                // 脚本或链接标记的公共路径
                 publicPath: 'lib'
             }
         ]),
-        // 描述动态链接库的文件内容
-        new webpack.DllReferencePlugin({
-            context: __ROOT,
-            manifest: require(path.resolve(__ROOT, 'dll/commonLib.manifest.json')) // 必须是绝对路径，相对路径会报错
+        new HappyPack({
+            id: 'babel',
+            threadPool: happyThreadPool,
+            loaders: ['cache-loader', 'babel-loader'],
+            verbose: true // 允许 HappyPack 输出日志
         }),
         // 按需加载lodash
         new LodashModuleReplacementPlugin({
             paths: true
-        }),
-        // 以进度条的形式反馈打包进度
-        new ProgressBarPlugin()
+        })
     ]
 };

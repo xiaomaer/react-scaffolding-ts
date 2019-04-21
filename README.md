@@ -89,4 +89,5 @@ create-react-ts -h 查看帮助
 
 ## todo
 * jest单元测试支持
-* gitlab ci持续集成
+* 持续集成测试、构建、部署
+* 日志监控
