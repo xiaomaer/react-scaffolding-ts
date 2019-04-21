@@ -28,8 +28,7 @@ let prodConfig = merge(baseWebpackConfig, {
                     {
                         loader: 'css-loader',
                         options: {
-                            importLoaders: 1, // 0 => 无 loader(默认); 1 => postcss-loader; 2 => postcss-loader, sass-loader
-                            sourceMap: true
+                            importLoaders: 1 // 0 => 无 loader(默认); 1 => postcss-loader; 2 => postcss-loader, sass-loader
                         }
                     },
                     'postcss-loader'
@@ -45,17 +44,11 @@ let prodConfig = merge(baseWebpackConfig, {
                     {
                         loader: 'css-loader',
                         options: {
-                            importLoaders: 2, // 0 => 无 loader(默认); 1 => postcss-loader; 2 => postcss-loader, sass-loader
-                            sourceMap: true
+                            importLoaders: 2 // 0 => 无 loader(默认); 1 => postcss-loader; 2 => postcss-loader, sass-loader
                         }
                     },
                     'postcss-loader',
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: true
-                        }
-                    }
+                    'sass-loader'
                 ]
             },
             {
@@ -68,12 +61,11 @@ let prodConfig = merge(baseWebpackConfig, {
                     {
                         loader: 'css-loader',
                         options: {
-                            importLoaders: 2, // 0 => 无 loader(默认); 1 => postcss-loader; 2 => postcss-loader, sass-loader
-                            sourceMap: true
+                            importLoaders: 2 // 0 => 无 loader(默认); 1 => postcss-loader; 2 => postcss-loader, sass-loader
                         }
                     },
                     'postcss-loader',
-                    { loader: 'less-loader', options: { javascriptEnabled: true, sourceMap: true } }
+                    { loader: 'less-loader', options: { javascriptEnabled: true } }
                 ]
             }
         ]
@@ -87,7 +79,7 @@ let prodConfig = merge(baseWebpackConfig, {
             new UglifyJsPlugin({
                 parallel: os.cpus().length,
                 cache: true,
-                sourceMap: true,
+                // sourceMap: true, //使用 SourceMaps 将错误信息的位置映射到模块。这会减慢编译的速度。因此去掉
                 uglifyOptions: {
                     compress: {
                         // 在UglifyJs删除没有用到的代码时不输出警告

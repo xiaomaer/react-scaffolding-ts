@@ -1,16 +1,17 @@
 const webpack = require('webpack');
 const path = require('path');
 const HappyPack = require('happypack');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin'); // 以进度条的形式反馈打包进度
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin'); // 清空文件夹
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-// const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+const os = require('os');
 
 const __ROOT = path.resolve(__dirname, '../'); // 根目录;
 
 const happyThreadPool = HappyPack.ThreadPool({
-    size: 5
+    size: os.cpus().length
 });
 
 module.exports = {
@@ -20,12 +21,13 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.ts', '.tsx', '.jsx'],
         alias: {
-            '@api': path.resolve(__dirname, 'src/api/'),
+            '@api': path.resolve(__ROOT, 'src/api/'),
             '@components': path.resolve(__ROOT, 'src/components/'),
             '@constants': path.resolve(__ROOT, 'src/constants/'),
             '@pages': path.resolve(__ROOT, 'src/pages/'),
             '@utils': path.resolve(__ROOT, 'src/utils/')
-        }
+        },
+        modules: [path.resolve(__ROOT, 'src'), 'node_modules']
     },
     module: {
         rules: [
@@ -37,7 +39,7 @@ module.exports = {
             },
             {
                 test: /\.(ts|js)x?$/,
-                use: 'happypack/loader?id=tsx',
+                use: 'happypack/loader?id=babel',
                 include: path.join(__ROOT, 'src'),
                 exclude: /node_modules/
             },
@@ -79,24 +81,15 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(['dist'], {
-            root: __ROOT, // 根目录
+        new CleanWebpackPlugin({
             verbose: true, // 开启在控制台输出信息
             dry: false // 启用删除文件
         }),
         new HappyPack({
-            id: 'tsx',
+            id: 'babel',
             threadPool: happyThreadPool,
-            loaders: [
-                {
-                    loader: 'babel-loader',
-                    options: {
-                        cacheDirectory: true
-                    }
-                }
-            ],
-            // 允许 HappyPack 输出日志
-            verbose: true
+            loaders: ['cache-loader', 'babel-loader'],
+            verbose: true // 允许 HappyPack 输出日志
         }),
         // Generates an `index.html` file with the <script> injected.
         new HtmlWebpackPlugin({
@@ -115,27 +108,25 @@ module.exports = {
                 minifyURLs: true
             }
         }),
-        // 该插件将把给定的 JS 或 CSS 文件添加到 webpack 配置的文件中，并将其放入资源列表 html webpack插件注入到生成的 html 中。
-        /*  new AddAssetHtmlPlugin([
+        // 该插件将给定的 JS 或 CSS 文件添加到 webpack 配置的文件中，并将其放入资源列表 html webpack插件注入到生成的 html 中。
+        new AddAssetHtmlPlugin([
             {
                 // 要添加到编译中的文件的绝对路径，以及生成的HTML文件。支持 globby 字符串
-                filepath: require.resolve(path.join(__ROOT, 'dll/commonLib.dll.js'))
+                filepath: path.resolve(__ROOT, 'dll/*.dll.js'),
+                // 文件输出目录
+                outputPath: 'lib'
             }
-        ]), */
-
-        // 描述 vendor 动态链接库的文件内容
+        ]),
+        // 描述动态链接库的文件内容
         /* new webpack.DllReferencePlugin({
             context: __ROOT,
-            manifest: require(path.join(__ROOT, 'dll/commonLib.manifest.json'))
+            manifest: require('../dll/commonLib.manifest.json')
         }), */
-
-        // 按需加载moment时区设置
-        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         // 按需加载lodash
         new LodashModuleReplacementPlugin({
             paths: true
         }),
-        // 打包进度条
+        // 以进度条的形式反馈打包进度
         new ProgressBarPlugin()
     ]
 };
