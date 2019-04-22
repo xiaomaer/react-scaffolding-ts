@@ -1,13 +1,13 @@
 {
   "name": "create-react-ts-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "a simple react scaffolding with typescript",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xiaomaer/react-scaffolding-ts.git"
   },
   "bin": {
-    "create-react": "./bin/index.js"
+    "create-react-ts": "./bin/index.js"
   },
   "keywords": [
     "react",
