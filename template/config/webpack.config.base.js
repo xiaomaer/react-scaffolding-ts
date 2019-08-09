@@ -7,6 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const os = require('os');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 const __ROOT = path.resolve(__dirname, '../'); // 根目录;
 const __SRC = path.resolve(__ROOT, 'src');
@@ -82,13 +83,13 @@ module.exports = {
         ]
     },
     plugins: [
-        // 以进度条的形式反馈打包进度
-        new ProgressBarPlugin(),
         // 清空文dist件夹
         new CleanWebpackPlugin({
             verbose: true, // 开启在控制台输出信息
             dry: false // 启用删除文件
         }),
+        // 以进度条的形式反馈打包进度
+        new ProgressBarPlugin(),
         // 描述动态链接库的文件内容
         new webpack.DllReferencePlugin({
             context: __ROOT,
@@ -131,6 +132,11 @@ module.exports = {
         // 按需加载lodash
         new LodashModuleReplacementPlugin({
             paths: true
+        }),
+        new StyleLintPlugin({
+            files: ['**/*.{css,less,sass,scss}'],
+            cache: true,
+            emitErrors: true
         })
     ]
 };

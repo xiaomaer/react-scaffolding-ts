@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render checkbox 1`] = `
+<div
+  className=""
+  style={Object {}}
+>
+  <input
+    checked={false}
+    defaultChecked={false}
+    id="xiao"
+    name="xxx"
+    onChange={[Function]}
+    type="checkbox"
+    value="xxx"
+  />
+  <span>
+    label
+  </span>
+</div>
+`;
+
+exports[`test onchange event 1`] = `
+<div
+  className=""
+  style={Object {}}
+>
+  <input
+    checked={false}
+    defaultChecked={false}
+    onChange={[Function]}
+    type="checkbox"
+    value="xxx"
+  />
+  <span>
+    label
+  </span>
+</div>
+`;
+
+exports[`test onchange event 2`] = `
+<div
+  className=""
+  style={Object {}}
+>
+  <input
+    checked={true}
+    defaultChecked={false}
+    onChange={[Function]}
+    type="checkbox"
+    value="xxx"
+  />
+  <span>
+    label
+  </span>
+</div>
+`;
