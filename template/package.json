@@ -24,12 +24,12 @@
         }
     },
     "lint-staged": {
-        "src/**/*.{ts,tsx,js,jsx}": [
+        "**/*.{ts,tsx,js,jsx}": [
             "npm run format:es",
             "eslint --fix",
             "git add"
         ],
-        "src/**/*.{css,scss,less}": [
+        "**/*.{css,scss,less}": [
             "npm run format:style",
             "stylelint --fix",
             "git add"
