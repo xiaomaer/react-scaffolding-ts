@@ -42,6 +42,9 @@ npm run lint:style：自动修复src目录下不符合stylelint规范的代码
 npm run format:es： prettier格式化ts/tsx
 npm run format:style： prettier格式化css/less/sass
 npm run commit：符合angular规范的git commit
+npm run test：运行测试用例
+npm run test:watch：自动监控运行测试用例
+npm run test:coverage：测试用例覆盖情况
 ```
 
 ## 目录结构
@@ -50,7 +53,6 @@ npm run commit：符合angular规范的git commit
 ├── config  --------------------- webpack相关配置
 ├── dist  --------------------- 打包文件
 ├── dll  --------------------- dll文件
-├── package.json  --------------------- 项目配置
 ├── public  --------------------- html入口文件
 ├── src  ------------------------------ 项目代码目录
 │    ├── api  ------------------- 接口集合
@@ -69,6 +71,7 @@ npm run commit：符合angular规范的git commit
 │    └── utils  -------------------------- 通用函数
 ├── test  ------------------------------ 测试用例
 ├── types  ------------------------------ ts类型定义
+├── .babelrc  ------------------------------ babel配置文件
 ├── .browserslistrc  ------------------------------ babel兼容浏览器配置
 ├── .commitlintrc.js  ------------------------------ commit msg规范检验配置
 ├── .editorconfig   ------------------------------ 编辑器配置
@@ -80,6 +83,7 @@ npm run commit：符合angular规范的git commit
 ├── .prettierrc.js  ------------------------------ prettier配置
 ├── .stylelintignore  ------------------------------ style lint忽略文件
 ├── .stylelintrc.js  ------------------------------ style lint配置
+├── jest.config.js  ------------------------------ 单元测试jest配置文件
 ├── package-lock.json  --------------------- package lock 文件
 ├── package.json  --------------------- 项目配置
 ├── README.md  ------------------------ 说明文件

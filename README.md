@@ -25,8 +25,8 @@
 
 ## 环境
 ```
-node v11.14.0
-npm v6.7.0
+node v11.14.0+
+npm v6.7.0+
 ```
 
 ## 安装与使用
@@ -39,9 +39,9 @@ npm install
 
 ## create-react相关命令
 ```
-create-react-ts [projectName] 创建项目
-create-react-ts -v 查看create-react-ts版本号
-create-react-ts -h 查看帮助
+create-react-ts init 创建项目
+create-react-ts -v 查看工具版本号
+create-react-ts -h 查看工具帮助
 ```
 
 ## 模版结构
@@ -50,7 +50,6 @@ create-react-ts -h 查看帮助
 ├── config  --------------------- webpack相关配置
 ├── dist  --------------------- 打包文件
 ├── dll  --------------------- dll文件
-├── package.json  --------------------- 项目配置
 ├── public  --------------------- html入口文件
 ├── src  ------------------------------ 项目代码目录
 │    ├── api  ------------------- 接口集合
@@ -69,6 +68,7 @@ create-react-ts -h 查看帮助
 │    └── utils  -------------------------- 通用函数
 ├── test  ------------------------------ 测试用例
 ├── types  ------------------------------ ts类型定义
+├── .babelrc  ------------------------------ babel配置文件
 ├── .browserslistrc  ------------------------------ babel兼容浏览器配置
 ├── .commitlintrc.js  ------------------------------ commit msg规范检验配置
 ├── .editorconfig   ------------------------------ 编辑器配置
@@ -80,6 +80,7 @@ create-react-ts -h 查看帮助
 ├── .prettierrc.js  ------------------------------ prettier配置
 ├── .stylelintignore  ------------------------------ style lint忽略文件
 ├── .stylelintrc.js  ------------------------------ style lint配置
+├── jest.config.js  ------------------------------ 单元测试jest配置文件
 ├── package-lock.json  --------------------- package lock 文件
 ├── package.json  --------------------- 项目配置
 ├── README.md  ------------------------ 说明文件
@@ -88,6 +89,6 @@ create-react-ts -h 查看帮助
 
 
 ## todo
-* jest单元测试支持
-* 持续集成测试、构建、部署
+* CI/CD
+* 关联git仓库
 * 日志监控
