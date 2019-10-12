@@ -22,8 +22,9 @@
             "@constants/*": ["src/constants/*"],
             "@pages/*": ["src/pages/*"],
             "@utils/*": ["src/utils/*"]
-        }
+        },
+        "typeRoots": ["node_modules/@types", "./types/*"]
     },
-    "include": ["src"],
+    "include": ["src", "types"],
     "exclude": ["node_modules", "dist"]
 }
