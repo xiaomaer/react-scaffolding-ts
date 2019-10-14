@@ -1,17 +1,27 @@
 #!/usr/bin/env node
+const program = require("commander");
+const packageJson = require('../package.json'); 
+const init=require('../actions/index');
 
-const fs = require('fs');
-const path = require('path');
-// 解析命令行
+program
+  .version(packageJson.version, "-v,--version")
+  .command("init")
+  .description("初始化项目")
+  .action(init);
+
+
+/* const fs = require('fs');
+const path = require('path');*/
+
+/* // 解析命令行
 const yargs = require('yargs');
 // 获取命令行参数
 const argv = yargs.argv;
 // 创建项目命令
-const createCli = 'create-react-ts';
-const packageJson = require('../package.json');
+const createCli = 'create-react-ts'; */
 
 // create-react包括的命令(-v,-h)
-yargs.usage('Usage: create-react-ts [options]')
+/* yargs.usage('Usage: create-react-ts [options]')
   .version(packageJson.version)
   .alias('v', 'version')
   .help('h')
@@ -23,10 +33,10 @@ if (argv._[0] === undefined) {
   console.log('请输入项目名称');
   console.log(`请执行: ${createCli} [projectName]`);
   return;
-}
+} */
 
 // 获取初始化react项目模版
-const template = path.resolve(__dirname, '../template');
+/* const template = path.resolve(__dirname, '../template');
 // 存放初始化react项目模版的路径
 const des = path.resolve(`${process.cwd()}/${argv._[0]}`);
 // 把初始化项目的模版复制到drt文件夹下
@@ -73,4 +83,4 @@ function copyDir(src, des, callback) {
       });
     }
   }
-};
+}; */

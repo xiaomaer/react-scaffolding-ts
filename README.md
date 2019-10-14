@@ -32,16 +32,15 @@ npm v6.7.0+
 ## 安装与使用
 ```
 npm install create-react-ts-cli -g
-create-react-ts [projectName]
+create-react-ts init
 cd [projectName]
 npm install
 ```
 
 ## create-react相关命令
 ```
-create-react-ts init 创建项目
+create-react-ts init 初始化项目
 create-react-ts -v 查看工具版本号
-create-react-ts -h 查看工具帮助
 ```
 
 ## 模版结构
@@ -92,3 +91,7 @@ create-react-ts -h 查看工具帮助
 * CI/CD
 * 关联git仓库
 * 日志监控
+
+## 待扩展
+* 模版类型（vue/ng等）
+* 从远程仓库拉取模版

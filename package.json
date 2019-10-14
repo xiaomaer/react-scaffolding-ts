@@ -25,6 +25,9 @@
   },
   "homepage": "https://github.com/xiaomaer/react-scaffolding-ts#readme",
   "dependencies": {
-    "yargs": "^11.0.0"
+    "chalk": "^2.4.2",
+    "commander": "^3.0.2",
+    "inquirer": "^7.0.0",
+    "ora": "^4.0.2"
   }
 }
