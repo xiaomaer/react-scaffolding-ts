@@ -13,8 +13,9 @@ function init() {
       name: "name",
       type: "input",
       message: "请输入项目名称",
-      validate: function(name) {
-        return !!name;
+      validate: function validateName(name) {
+        if(name) return true;
+        return '项目名称不能为空'
       }
     },
     {
@@ -38,32 +39,31 @@ function init() {
     const { name, description, version, author } = answers;
     // 项目路径
     const des = path.resolve(`${process.cwd()}/${name}`);
-    const loading = ora("downloading template ...");
+    const loading = ora("copy template ...");
     loading.start();
     // 把初始化项目的模版复制到des文件夹下
     copyDir(template, des);
     //修改项目文件夹中 package.json 文件
     const fileName = `${des}/package.json`;
     if (fs.existsSync(fileName)) {
+      loading.succeed();
       const contents = JSON.parse(fs.readFileSync(fileName, "utf8"));
       contents.name = name;
       contents.author = author;
       contents.description = description;
       contents.version = version;
       fs.writeFileSync(fileName, JSON.stringify(contents, null, "\t"), "utf-8");
-      loading.succeed();
-      console.log(chalk.green("项目初始化完成"));
+      console.log(chalk.green("项目初始化完成..."));
     }
   });
 }
 
 // 递归复制template目录下的文件
 function copyDir(src, des) {
-  if (fs.existsSync(des)) {
-    _copy(src, des);
-  } else {
+  if (!fs.existsSync(des)) {
     fs.mkdirSync(des);
   }
+  _copy(src, des);
 
   function _copy(src, des) {
     try {
@@ -81,7 +81,7 @@ function copyDir(src, des) {
         }
       });
     } catch (error) {
-      console.log("项目初始化错误", chalk.red(err));
+      console.log("项目初始化错误", chalk.red(error));
       loading.fail();
     }
   }
