@@ -8,6 +8,7 @@ program
   .command("init")
   .description("初始化项目")
   .action(init);
+program.parse(process.argv);  
 
 
 /* const fs = require('fs');
