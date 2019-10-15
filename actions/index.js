@@ -55,6 +55,7 @@ function init() {
       fs.writeFileSync(fileName, JSON.stringify(contents, null, "\t"), "utf-8");
       console.log(chalk.green("项目初始化完成..."));
     }
+    process.exit();
   });
 }
 
