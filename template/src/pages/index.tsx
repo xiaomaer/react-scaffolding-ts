@@ -11,8 +11,8 @@ import App from './App';
 import './index.scss';
 
 ReactDOM.render(
-    <LocaleProvider locale={zhCN}>
-        <App />
-    </LocaleProvider>,
-    document.getElementById('root')
+  <LocaleProvider locale={zhCN}>
+    <App />
+  </LocaleProvider>,
+  document.getElementById('root')
 );
